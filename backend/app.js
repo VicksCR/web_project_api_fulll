@@ -1,13 +1,12 @@
 //Aun falta modificar el archivo comparando con SP18Desp
 require("dotenv").config();
-console.log("Variables de entorno:", process.env.NODE_ENV);
+//console.log("Variables de entorno:", process.env.NODE_ENV);
 
 const express = require("express");
 const mongoose = require("mongoose");
 const { errors: celebrateErrors, celebrate, Joi } = require("celebrate");
-const cors = require("cors");
-//
 const { validateURL } = require("./middleware/validators");
+//const cors = require("cors");
 
 const { createUser, login } = require("./controllers/users");
 const { requestLogger, errorLogger } = require("./middleware/logger");
@@ -17,14 +16,14 @@ const auth = require("./middleware/auth");
 
 const NotFoundError = require("./errors/not-found-err");
 
-//const { PORT = 3000 } = process.env;
-const { PORT = 3000, MONGODB_URI = "mongodb://localhost:27017/aroundb" } =
-  process.env;
-mongoose.connect(MONGODB_URI, {
+const { PORT = 3000 } = process.env;
+const app = express();
+
+//Conexion a MongoDB
+mongoose.connect("mongodb://localhost:27017/aroundb", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-// o const { PORT = 3000, MONGODB_URI = "mongodb://localhost:27017/aroundb" } = process.env;
 
 app.use(express.json());
 /*
