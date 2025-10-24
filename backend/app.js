@@ -10,6 +10,7 @@ const { validateURL } = require("./middleware/validators");
 
 const { createUser, login } = require("./controllers/users");
 const { requestLogger, errorLogger } = require("./middleware/logger");
+const errorHandler = require("./middleware/errorHandler");
 const usersRouter = require("./routes/users");
 const cardsRouter = require("./routes/cards");
 const auth = require("./middleware/auth");
@@ -93,17 +94,7 @@ app.use(errorLogger);
 //app.use(errors());
 app.use(celebrateErrors());
 
-// PENDIENTE DE PONER app.use(errorHandler);
-//revisar que con handle error se puede borrar esto
-
-app.use((err, req, res, next) => {
-  const { statusCode = 500, message } = err;
-
-  res.status(statusCode).send({
-    message:
-      statusCode === 500 ? "Se ha producido un error en el servidor" : message,
-  });
-});
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);
