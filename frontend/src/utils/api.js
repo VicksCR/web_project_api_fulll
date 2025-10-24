@@ -20,6 +20,7 @@ class Api {
     return fetch(`${this.baseUrl}/users/me`, {
       method: "GET",
       headers: this._getHeaders(),
+      credentials: "include",
     }).then(this._checkResponse);
   }
 
@@ -27,6 +28,7 @@ class Api {
     return fetch(`${this.baseUrl}/cards`, {
       method: "GET",
       headers: this._getHeaders(),
+      credentials: "include",
     }).then(this._checkResponse);
   }
 
@@ -35,6 +37,7 @@ class Api {
       method: "PATCH",
       headers: this._getHeaders(),
       body: JSON.stringify({ name, about }),
+      credentials: "include",
     }).then(this._checkResponse);
   }
 
@@ -43,6 +46,7 @@ class Api {
       method: "POST",
       headers: this._getHeaders(),
       body: JSON.stringify({ name, link }),
+      credentials: "include",
     }).then(this._checkResponse);
   }
 
@@ -50,6 +54,7 @@ class Api {
     return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: isLiked ? "DELETE" : "PUT",
       headers: this._getHeaders(),
+      credentials: "include",
     }).then(this._checkResponse);
   }
 
@@ -57,6 +62,7 @@ class Api {
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._getHeaders(),
+      credentials: "include",
     }).then(this._checkResponse);
   }
 
@@ -65,17 +71,13 @@ class Api {
       method: "PATCH",
       headers: this._getHeaders(),
       body: JSON.stringify({ avatar }),
+      credentials: "include",
     }).then(this._checkResponse);
   }
 }
 
 const api = new Api({
-  baseUrl: "http://localhost:3000", //el backend
-  /*"https://around-api.es.tripleten-services.com/v1",
-  headers: {
-    Authorization: "d8103c68-c98a-47c6-ad4c-4da2fe47c74d",
-    "Content-Type": "application/json",
-  },*/
+  baseUrl: "https://api.aroundcr.minnsroad.com",
 });
 
 export default api;

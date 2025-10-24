@@ -1,6 +1,4 @@
-export const BASE_URL = "http://localhost:3000";
-//"https://localhost:3000";
-//"https://se-register-api.en.tripleten-services.com/v1";
+export const BASE_URL = "https://api.aroundcr.minnsroad.com";
 
 const _checkResponse = async (res) => {
   const text = await res.text();
@@ -25,6 +23,7 @@ export const register = (email, password) => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
+    credentials: "include",
   }).then(_checkResponse);
 };
 
@@ -33,6 +32,7 @@ export const authorize = (email, password) => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
+    credentials: "include",
   })
     .then(_checkResponse)
     .then((data) => {
@@ -50,5 +50,6 @@ export const checkToken = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+    credentials: "include",
   }).then(_checkResponse);
 };
